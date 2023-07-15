@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react';
 import MeetupList from '../Components/meetups/MeetupList';
 
 // const DUMMY_DATA= [
-//     {
+//     { 
 //       id: 'm1',
 //       title: 'This is a first meetup',
 //       image:
