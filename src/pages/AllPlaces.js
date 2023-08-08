@@ -1,39 +1,31 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import MeetupList from '../Components/meetups/MeetupList';
+import MeetupList from "../Components/meetups/MeetupList";
 
-// const DUMMY_DATA= [
-//     { 
-//       id: 'm1',
-//       title: 'This is a first meetup',
-//       image:
-//         'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg',
-//       address: 'Meetupstreet 5, 12345 Meetup City',
-//       description:
-//         'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
-//     },
-//     {
-//       id: 'm2',
-//       title: 'This is a second meetup',
-//       image:
-//         'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg',
-//       address: 'Meetupstreet 5, 12345 Meetup City',
-//       description:
-//         'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
-//     },
-//   ];
-  
+const DUMMY_DATA = [
+  {
+    id: "m1",
+    title: "Ahmedabad",
+    image: "https://i.ytimg.com/vi/P4HDRSNStf4/maxresdefault.jpg",
+    address: "Ahmedabad City",
+    description: "This is the world's Heritage city. ",
+  },
+  {
+    id: "m2",
+    title: "Banglore",
+    image: "https://im.hunt.in/cg/City-Guide/about-bangalore.jpg",
+    address: "Banglore City",
+    description: "Banglore city",
+  },
+];
 
-function AllMeetups()
-{
-  const [isLoading, setIsLoading]= useState(true);
-  const [loadedMeetups , setLoadedMeetups ] = useState([]);
+function AllMeetups() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedMeetups, setLoadedMeetups] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(
-      'https://test-d4f87-default-rtdb.firebaseio.com/test.json',
-      )
+    fetch("https://test-d4f87-default-rtdb.firebaseio.com/test.json")
       .then((response) => {
         return response.json();
       })
@@ -43,7 +35,7 @@ function AllMeetups()
         for (const key in data) {
           const meetup = {
             id: key,
-            ...data[key]
+            ...data[key],
           };
           // console.log(key);
           meetups.push(meetup);
@@ -52,19 +44,23 @@ function AllMeetups()
         setIsLoading(false);
         setLoadedMeetups(meetups);
       });
-  } , []);
+  }, []);
 
-    if(isLoading){
-      return (<section>
+  if (isLoading) {
+    return (
+      <section>
         <p>Loading...</p>
-      </section>); 
-    }
+      </section>
+    );
+  }
 
-    return (<section>
-        <h1>All Places</h1>
-        <MeetupList meetups={loadedMeetups} />
-        {/* <MeetupList meetups={DUMMY_DATA} /> */}
-    </section>);
+  return (
+    <section>
+      <h1>All Places</h1>
+      <MeetupList meetups={DUMMY_DATA} />
+      <MeetupList meetups={loadedMeetups} />
+    </section>
+  );
 }
 
 export default AllMeetups;
